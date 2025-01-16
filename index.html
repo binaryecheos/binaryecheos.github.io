@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Gourav Sahu</title>
+    <div id="astronaut"></div>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            color: rgba(245, 245, 245, 0.627);
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        body {
+            background: url(gradient.webp);
+            background-color: black;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Parallax effect */
+            min-height: 100vh;
+            display: grid;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 1s ease-out;
+            scroll-behavior: smooth; /* Smooth scrolling */
+
+        }
+
+        
+
+        .container {
+            background: #1f1f1f41;
+            background-size: cover;
+            background-position: center;
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            width: 90%;
+            max-width: 1200px;
+            padding: 30px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            animation: slideIn 1s ease-out;
+            margin: 35px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            animation: slideIn 1s ease-out;
+            background-color: #18181850;
+            border-radius: 20px;
+            padding: 13px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: rgba(245, 245, 245, 0.627);
+            animation: fadeIn 1s ease-out;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: rgba(245, 245, 245, 0.627);
+            font-weight: 500;
+            transition: color 0.3s;
+            animation: fadeIn 1s ease-out;
+        }
+
+        nav ul li a:hover {
+            color: #333;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            color: #222;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #555;
+        }
+
+        /* Skills Section */
+        #skills {
+            margin-top: 50px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .skill {
+            background: #1a1a1a38;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            opacity: 0;
+            animation: fadeInSkill 0.7s forwards;
+            background-color: #1a1a1a38 ;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .skill:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+        }
+
+        .skill h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        /* Projects Section */
+        #projects {
+            margin-top: 50px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .project {
+            background-color: #1a1a1a38;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .project h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .project p {
+            font-size: 1rem;
+            color: rgba(245, 245, 245, 0.627);
+        }
+
+        .project:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Interests Section */
+        #interests {
+            margin-top: 50px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .interest {
+            background-color: #1a1a1a38;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .interest h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: rgba(245, 245, 245, 0.627);
+        }
+
+        .interest p {
+            font-size: 1rem;
+            color: rgba(245, 245, 245, 0.627);
+        }
+
+        /* Taskflow Section */
+        #taskflow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 50px 0;
+            padding: 20px;
+            background-color: #1a1a1a38;
+            border-radius: 20px;
+        }
+
+        .task {
+            text-align: center;
+            width: 200px;
+        }
+
+        .task h2 {
+            font-size: 1.5rem;
+            color: rgba(245, 245, 245, 0.627);
+            margin-bottom: 10px;
+        }
+
+        .task p {
+            font-size: 1rem;
+            color: rgba(245, 245, 245, 0.627);
+        }
+
+        .arrow {
+            font-size: 2rem;
+            color: rgba(245, 245, 245, 0.627);
+        }
+
+        /* Intro Section */
+        #intro {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 40px 0;
+            opacity: 0;
+            animation: slideInFromRight 1.5s forwards;
+            background-color: #1a1a1a38;
+            color: rgba(245, 245, 245, 0.627);
+            border-radius: 20px;
+            padding: 20px;
+        }
+
+        .intro-text {
+            max-width: 50%;
+        }
+
+        .intro-text h2 {
+            font-size: 2rem;
+            color: rgba(245, 245, 245, 0.627);
+            margin-bottom: 20px;
+        }
+
+        .intro-text p {
+            font-size: 1.1rem;
+            color: rgba(245, 245, 245, 0.627);
+        }
+
+        /* .intro-img {
+            max-width: 40%;
+            border-radius: 10px;
+            width: 150px;
+        } */
+
+        /* Education Section */
+        #education {
+            margin-top: 50px;
+            background-color: #1a1a1a38;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #education h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: rgba(245, 245, 245, 0.627);
+        }
+
+        .education-timeline {
+            position: relative;
+            padding-left: 50px;
+            padding-right: 50px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .timeline-item {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: #1a1a1aa1;
+        }
+
+        .timeline-content {
+            background-color: #1a1a1aa1;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
+
+        .timeline-content h4 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .timeline-content p {
+            font-size: 1rem;
+            color: rgba(245, 245, 245, 0.627);
+        }
+
+        .year {
+            font-size: 0.9rem;
+            color: rgba(245, 245, 245, 0.627);
+            margin-top: 10px;
+        }
+
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: rgba(245, 245, 245, 0.627);
+            animation: fadeIn 2s ease-out;
+        }
+
+        .connect {
+    text-align: center;
+    padding: 20px;
+    background-color: #1a1a1a38;
+    color: #333;
+    font-family: Arial, sans-serif;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+}
+
+.connect h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: rgba(245, 245, 245, 0.627);
+}
+
+.connect p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    color: rgba(245, 245, 245, 0.627);
+}
+
+.social-media {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.social-icon {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 15px;
+    background-color: #0c0c0c;
+    border: 1px solid #1a1a1a;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.social-icon img {
+    width: 30px;
+    height: 30px;
+}
+
+.social-icon a {
+    text-decoration: none;
+    font-size: 1rem;
+    color: rgba(245, 245, 245, 0.627); 
+    transition: color 0.3s;
+}
+
+.social-icon:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.social-icon a:hover {
+    color: #0056b3; 
+}
+
+        /* Keyframe Animations */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            0% {
+                transform: translateY(-30px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInFromRight {
+            0% {
+                transform: translateX(30px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInSkill {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">Gourav Sahu</div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#interests">Interests</a></li>
+                    <li><a href="#taskflow">Taskflow</a></li>
+                    <li><a href="#education">Education</a></li>
+                    <li><a href="#connect">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <h1>Welcome to My Portfolio</h1>
+            <p>A passionate software engineer with a keen interest in AI/ML and Data Science.</p>
+        </section>
+
+        <section id="intro">
+            <div class="intro-text">
+                <h2>Hello, I'm Gourav</h2>
+                <p>I am a budding software engineer, passionate about leveraging AI and ML technologies to create impactful solutions. This portfolio highlights my skills, interests, and projects that showcase my expertise and enthusiasm for learning.</p>
+            </div>
+            <!--
+            <div class="intro-img">
+                <img src="Clipped_image_20240922_011517.png" alt="Gourav's Image" width="150px" />
+            </div> 
+            -->
+        </section>
+        <section id="education">
+            <h3>Education</h3>
+            <div class="education-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h4>Secondary School</h4>
+                        <p>Completed my secondary education, with a strong foundation in science and mathematics.</p>
+                        <span class="year">2022</span>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h4>Intermediate</h4>
+                        <p>Studied Science with a focus on Physics, Chemistry, and Mathematics.</p>
+                        <span class="year">2024</span>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h4>Undergraduate</h4>
+                        <p>B.Tech in Computer Science Engineering with a specialization in AI/ML. Currently pursuing my first year at Quantum University.</p>
+                        <span class="year">2024 - Present</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <p></p>
+        </footer>
+    </div>
+    <div class="container">
+        <h2><b>Skills</b></h2>
+        <section id="skills">
+            <div class="skill">
+                <h2>Python</h2>
+                <p>Expert in Python for data science, automation, and web development.</p>
+            </div>
+            <div class="skill">
+                <h2>HTML & CSS</h2>
+                <p>Skilled in html and css for creating simple frontend interface.</p>
+            </div>
+            <div class="skill">
+                <h2>Pandas & Numpy</h2>
+                <p>learned to use popular and prominent Python libraries.</p>
+            </div>
+            <div class="skill">
+                <h2>Flask</h2>
+                <p>Experience with using python (jinja2) for building modern web apps.</p>
+            </div>
+            <div class="skill">
+                <h2>OpenCV and Mediapipe</h2>
+                <p>Have experience in building Computer vision projects using OpencCV and Mediapipe .</p>
+            </div>
+        </section>
+    </div>
+
+    <div class="container">
+        <h2>Projects</h2>
+         <!-- Projects Section -->
+         <section id="projects">
+            <div class="project">
+                <h3>Face Detection Model</h3>
+                <p>Develop a face detection model using OpenCV and Mediapipe for real-time applications.</p>
+            </div>
+            <div class="project">
+                <h3>Attendance Management System</h3>
+                <p>Create a system using Python and text files for managing attendance records.</p>
+            </div>
+            <div class="project">
+                <h3>Mouse and Keyboard Automation</h3>
+                <p>Automate your mouse and keyboard actions using Python libraries like pyautogui.</p>
+            </div>
+            <div class="project">
+                <h3>WhatsApp Message Bomber</h3>
+                <p>Build a tool to send bulk messages on WhatsApp for testing purposes using Python.</p>
+            </div>
+            
+        </section>
+    </div>
+
+    <div class="container">
+        <!-- Interests Section -->
+        <section id="interests">
+            <div class="interest">
+                <h3>Cars</h3>
+                <p>Passionate about exploring the latest in automobile technology and the evolution of electric vehicles.</p>
+            </div>
+            <div class="interest">
+                <h3>Space</h3>
+                <p>Fascinated by space exploration, astronomy, and the cutting-edge technologies shaping the future of space travel.</p>
+            </div>
+        </section>
+
+    </div>
+      
+    <div class="container">
+         <!-- Taskflow Section -->
+         <section id="taskflow">
+            <div class="task">
+                <h2>Study</h2>
+                <p>Dedicate time daily to learning new concepts and practicing coding.</p>
+            </div>
+            <span class="arrow">→</span>
+            <div class="task">
+                <h2>Apply Knowledge</h2>
+                <p>Build projects and experiment with real-world applications of AI/ML and software development.</p>
+            </div>
+            <span class="arrow">→</span>
+            <div class="task">
+                <h2>Collaborate</h2>
+                <p>Work with others on open-source contributions and real-world projects to gain valuable experience.</p>
+            </div>
+        </section>
+
+
+    <section class="connect" id="connect">
+        <h2>Let's Connect</h2>
+        <p>Feel free to reach out to me for collaborations or just to chat about tech!</p>
+        <div class="social-media">
+            <div class="social-icon instagram">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" alt="Instagram">
+                <a href="https://www.instagram.com/v.gouravv" target="_blank">@v.gouravv</a>
+            </div>
+            <div class="social-icon discord">
+                <img src="https://upload.wikimedia.org/wikipedia/en/9/98/Discord_logo.svg" alt="Discord">
+                <a href="https://discord.com/users/1089944354291978320" target="_blank">@binaryecheos</a>
+            </div>
+            <div class="social-icon linkedin">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn">
+                <a href="https://www.linkedin.com/in/binaryecheos/" target="_blank">Gourav Sahu</a>
+            </div>
+            <div class="social-icon email">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Email">
+                <a href="mailto:binaryecheos@gmail.com" target="_blank">binaryecheos</a>
+            </div>
+        </div>
+    </section>
+
+       
+
+</body>
+</html>
