@@ -444,7 +444,7 @@ header {
         max-width: 40px;
     }
 }
-@media (max-width: 600px) {
+@media (max-width: 1255px) {
     .child-wrapper {
         width: 90vw;
         height: auto;
