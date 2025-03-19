@@ -6,24 +6,22 @@
     <title>Gourav Sahu</title>
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="b39651697f4f65895b07ef3610bf7799.jpeg" sizes="32x32">
 </head>
 <body>
     
-    <div class="maincon">
+
+    <header>
+        <div class="logo">Gourav Sahu</div>
+        <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </header>
         
-        <header>
-            <div class="logo">Gourav Sahu</div>
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#skills">Skills</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-            <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-        </header>
         
         <div class="main">
             <h1>Glad to have you here!</h1>
@@ -33,55 +31,62 @@
             </div>
         </div>
 
-        <div class="main">
-            <div class="skills-section">
+        
+            <div class="skills-section" id="items">
                 <h2>Skills</h2>
-                <div class="skills-container">
-                    <div class="skill-item">
+                <p>A blend of technical expertise and problem-solving abilities, with a focus on AI/ML, software development, and web technologies. Constantly exploring new tools and refining skills to build innovative and efficient solutions</p>
+
+                <button id="openModal">Click here</button>
+
+                <div class="overlay"></div>
+
+                <div class="child-wrapper">
+                    <button id="closeModal">Close</button>
+                    <div class="child">
                         <img src="python-logo.png" alt="Python Logo">
                         <span>Python</span>
                         <div class="description">A powerful programming language used in AI & ML.</div>
                     </div>
-                    <div class="skill-item">
+                    <div class="child">
                         <img src="Hey_Machine_Learning_Logo.png" alt="ML Logo">
                         <span>Machine Learning</span>
                         <div class="description">Supervised learning using scikit-learn Including Regression and Classification models.</div>
                     </div>
-                    <div class="skill-item">
+                    <div class="child">
                         <img src="statistics-bars-infographic-free-png.webp" alt="Deep Learning Logo">
                         <span>Statistical Algorithm Optimization</span>
                         <div class="description">Enhancing algorithm efficiency using probabilistic models, data-driven heuristics, and statistical inference.
                         </div>
                     </div>
-                    <div class="skill-item">
+                    <div class="child">
                         <img src="image.png" alt="PyTorch Logo">
                         <span>Tensorflow</span>
                         <div class="description">Exploring deep learning concepts and model training using TensorFlow and Keras.</div>
                     </div>
-                    <div class="skill-item">
+                    <div class="child">
                         <img src="exploratory-analysis.png" alt="PyTorch Logo">
                         <span>EDA</span>
                         <div class="description">Perform Exploratory Data Analysis to find Insights </div>
                     </div>
-                    <div class="skill-item">
+                    <div class="child">
                         <img src="pandas-logo-300.png" alt="PyTorch Logo">
                         <span>Pandas & Numpy</span>
                         <div class="description">Data Cleaning and Manipulation which is essential for higher accuracy.</div>
                     </div>
-                    <div class="skill-item">
+                    <div class="child">
                         <img src="flask.png" alt="PyTorch Logo">
                         <span>Static Web Dev</span>
                         <div class="description">Can make a functional static website using HTML, CSS, JS, and Flask.</div>
                     </div>
-                    <div class="skill-item">
+                    <div class="child">
                         <img src="seaborn.png" alt="PyTorch Logo">
                         <span>Data Visualization</span>
                         <div class="description">Data Visualization using Matplotlib and Seaborn.</div>
                     </div>
-                    <!-- Add more skill items here -->
                 </div>
+                
             </div>            
-        </div>
+        
 
         <div class="container">
             <div class="main">
@@ -131,12 +136,64 @@
                     
 
         </div>
-    </div>
+
     
     <script>
-        function toggleMenu() {
-            document.querySelector('.nav-links').classList.toggle('active');
+
+        
+        document.addEventListener("DOMContentLoaded", function () {
+            const menuToggle = document.querySelector(".menu-toggle");
+            const navLinks = document.querySelector(".nav-links");
+
+            menuToggle.addEventListener("click", function () {
+                navLinks.classList.toggle("active");
+            });
+        });
+
+
+        function openExpansion() {
+            document.getElementById("expansion").classList.add("active");
+            document.getElementById("overlay").classList.add("active");
         }
+
+        function closeExpansion() {
+            document.getElementById("expansion").classList.remove("active");
+            document.getElementById("overlay").classList.remove("active");
+        }
+        
+        document.addEventListener("DOMContentLoaded", function () {
+        const overlay = document.querySelector(".overlay");
+        const childWrapper = document.querySelector(".child-wrapper");
+        const openBtn = document.querySelector("#openModal");
+        const closeBtn = document.querySelector("#closeModal");
+
+        function openModal() {
+            overlay.classList.add("active");
+            childWrapper.classList.add("active");
+
+            // Ensure the highest z-index
+            overlay.style.zIndex = "99998";
+            childWrapper.style.zIndex = "99999";
+
+            // Force positioning
+            overlay.style.position = "fixed";
+            childWrapper.style.position = "fixed";
+        }
+
+        function closeModal() {
+            overlay.classList.remove("active");
+            childWrapper.classList.remove("active");
+
+            // Reset z-index
+            overlay.style.zIndex = "-1";
+            childWrapper.style.zIndex = "-1";
+        }
+
+        openBtn.addEventListener("click", openModal);
+        closeBtn.addEventListener("click", closeModal);
+    });
+
+        
        
     </script>
 
