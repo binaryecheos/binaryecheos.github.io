@@ -1,203 +1,485 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gourav Sahu</title>
-    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/png" href="b39651697f4f65895b07ef3610bf7799.jpeg" sizes="32x32">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gourav Sahu - ML Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #121212;
+      color: #ffffff;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      position: relative;
+    }
+    /* Subtle grain texture */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAMAAABHPGVmAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAABVJREFUeNrtwQEBAAAAgiD/r25IQAEAAAD1A6/9AAAAAElFTkSuQmCC') repeat;
+      opacity: 0.05;
+      z-index: -1;
+    }
+    /* Custom Cursor */
+    * {
+      cursor: none;
+    }
+    .custom-cursor {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #00ddeb;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+      box-shadow: 0 0 10px rgba(0, 221, 235, 0.5);
+    }
+    .custom-cursor::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 8px;
+      height: 8px;
+      background: #00ddeb;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0.6;
+      transition: opacity 0.2s ease;
+    }
+    .custom-cursor.hovered {
+      transform: scale(1.5);
+      border-color: #3a8dde;
+      box-shadow: 0 0 15px rgba(58, 141, 222, 0.7);
+    }
+    .custom-cursor.hovered::after {
+      opacity: 1;
+    }
+    .hero-bg {
+      background: linear-gradient(135deg, #3a8dde 0%, #00ddeb 50%, #f15a5a 100%);
+      border-bottom: 3px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+      opacity: 0.2;
+      animation: parallax-bg 20s linear infinite;
+    }
+    @keyframes parallax-bg {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-20%, -20%); }
+    }
+    .section-title {
+      color: #ffffff;
+      font-weight: 900;
+      border-left: 5px solid #00ddeb;
+      padding-left: 1.5rem;
+      position: relative;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(to right, #00ddeb, #3a8dde);
+    }
+    .card {
+      background: rgba(18, 18, 18, 0.8);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(0, 221, 235, 0.3);
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 50px rgba(0, 221, 235, 0.5);
+      border: 1px solid rgba(0, 221, 235, 0.7);
+    }
+    .project-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+    }
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 2px solid transparent;
+      border-radius: 16px;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .project-card:hover::before {
+      border-color: #00ddeb;
+      box-shadow: 0 0 20px rgba(0, 221, 235, 0.6);
+    }
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: linear-gradient(45deg, #00ddeb, #3a8dde);
+      color: white;
+      padding: 14px;
+      border-radius: 50%;
+      display: none;
+      z-index: 1000;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    .back-to-top:hover {
+      transform: scale(1.2);
+      box-shadow: 0 0 15px rgba(0, 221, 235, 0.6);
+    }
+    .contact-input {
+      background: rgba(18, 18, 18, 0.8);
+      border: 1px solid rgba(0, 221, 235, 0.5);
+      color: #ffffff;
+      padding: 0.75rem;
+      border-radius: 8px;
+      width: 100%;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .contact-input:focus {
+      outline: none;
+      border-color: #00ddeb;
+      box-shadow: 0 0 12px rgba(0, 221, 235, 0.4);
+    }
+    .section-divider {
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(to right, transparent, rgba(0, 221, 235, 0.4), transparent);
+      margin: 3rem 0;
+    }
+    .gradient-btn {
+      background: linear-gradient(45deg, #00ddeb, #3a8dde);
+      border: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .gradient-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(0, 221, 235, 0.6);
+    }
+  </style>
 </head>
 <body>
-    
+  <!-- Custom Cursor -->
+  <div class="custom-cursor" id="custom-cursor"></div>
 
-    <header>
-        <div class="logo">Gourav Sahu</div>
-        <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
-        <ul class="nav-links">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Contact</a></li>
+  <!-- Header -->
+  <header class="bg-black bg-opacity-90 sticky top-0 z-50 py-4 px-6 md:px-12 flex justify-between items-center card">
+    <div class="text-3xl font-bold text-white">Gourav Sahu</div>
+    <nav class="space-x-8">
+      <a href="#home" class="text-white hover:text-teal-400 transition font-semibold">Home</a>
+      <a href="#about" class="text-white hover:text-teal-400 transition font-semibold">About</a>
+      <a href="#projects" class="text-white hover:text-teal-400 transition font-semibold">Projects</a>
+      <a href="#contact" class="text-white hover:text-teal-400 transition font-semibold">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero-bg py-24 md:py-36 text-center">
+    <div class="container mx-auto px-6 card p-10 relative">
+      <h1 class="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-teal-400">
+        Machine Learning Enthusiast
+      </h1>
+      <p class="text-xl md:text-2xl max-w-3xl mx-auto mb-10 text-gray-200">
+        Building innovative ML solutions with a passion for data science and AI-driven impact.
+      </p>
+      <div class="flex justify-center gap-6">
+        <a href="#projects" class="gradient-btn text-white font-bold py-3 px-8 rounded-lg">View Projects</a>
+        <a href="#contact" class="gradient-btn text-white font-bold py-3 px-8 rounded-lg">Get in Touch</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- About Section -->
+  <section id="about" class="py-20 bg-black">
+    <div class="container mx-auto px-6">
+      <h2 class="text-4xl font-bold section-title mb-10">About Me</h2>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="card p-8">
+          <h3 class="text-2xl font-semibold text-white mb-4">Gourav Sahu</h3>
+          <p class="text-gray-200 mb-6">
+            I'm a B.Tech student in Computer Science and Engineering (AI & ML) at Quantum University, with a focus on machine learning, data science, and AI-driven solutions. My expertise spans Python, TensorFlow, PyTorch, and MLOps tools like MLflow and Docker.
+          </p>
+          <div class="flex flex-wrap gap-4 mb-4">
+            <a href="mailto:gourav.sahu.1695@gmail.com" class="gradient-btn text-white px-4 py-2 rounded-lg">Email</a>
+            <a href="https://www.linkedin.com/in/binaryecheos" target="_blank" class="gradient-btn text-white px-4 py-2 rounded-lg">LinkedIn</a>
+            <a href="https://github.com/binaryecheos" target="_blank" class="gradient-btn text-white px-4 py-2 rounded-lg">GitHub</a>
+            <a href="https://binaryecheos.github.io" target="_blank" class="gradient-btn text-white px-4 py-2 rounded-lg">Portfolio</a>
+          </div>
+        </div>
+        <div class="card p-8">
+          <h3 class="text-2xl font-semibold text-white mb-4">Education</h3>
+          <p class="text-gray-200"><strong>Quantum University</strong> | B.Tech in Computer Science and Engineering (AI & ML)</p>
+          <p class="text-gray-400">Aug 2024 – Jun 2028 (Expected)</p>
+          <p class="text-gray-200 mt-2"><strong>Relevant Coursework:</strong> Data Analysis & Data Science, Data Visualization, Data Structure & Programming, DBMS, Probabilistic Modelling</p>
+        </div>
+      </div>
+      <div class="mt-10 card p-8">
+        <h3 class="text-2xl font-semibold text-white mb-4">Technical Skills</h3>
+        <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-200">
+          <li><strong>Programming:</strong> Python, C++</li>
+          <li><strong>ML & Data Science:</strong> Data Analysis, Feature Engineering, EDA, Model Development & Evaluation, MLOps</li>
+          <li><strong>Libraries/Frameworks:</strong> Scikit-learn, TensorFlow, PyTorch, OpenCV, Flask, Streamlit</li>
+          <li><strong>AI/ML Tools:</strong> MLflow, Hugging Face, LangChain, Kaggle</li>
+          <li><strong>DevOps/Deployment:</strong> Docker, Kubernetes, Git, CI/CD</li>
+          <li><strong>Web:</strong> REST APIs, Static Web Development, Web Scraping</li>
+          <li><strong>OS:</strong> Windows, Linux, macOS</li>
         </ul>
-    </header>
-        
-        
-        <div class="main">
-            <h1>Glad to have you here!</h1>
-            <div class="pro">
-                <p>Hi, I'm <strong>Gourav Sahu</strong> — an aspiring ML Engineer passionate about AI, MLOps, and building intelligent systems. Exploring the intersection of data, code, and automation.</p>
-            <img src="Clipped_image_20240922_011517 (2).png" alt="" class="profile-img">
-            </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- Projects Section -->
+  <section id="projects" class="py-20 bg-black">
+    <div class="container mx-auto px-6">
+      <h2 class="text-4xl font-bold section-title mb-10">Projects</h2>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="project-card card p-8">
+          <img src="https://via.placeholder.com/400x200?text=Price+Prediction" alt="Price Prediction Model" class="w-full h-56 object-cover rounded-lg mb-4">
+          <h3 class="text-2xl font-semibold text-white mb-2">Price Prediction Model</h3>
+          <p class="text-gray-400 mb-2">Machine Learning Pipeline</p>
+          <p class="text-gray-200 mb-4">
+            Developed a robust ML pipeline for price prediction, integrating <strong>MLflow</strong> for experiment tracking and automated deployment for real-time predictions.
+          </p>
+          <a href="https://github.com/binaryecheos/Price-Prediction-Model" target="_blank" class="text-teal-400 hover:underline font-semibold">View on GitHub</a>
         </div>
-
-        
-            <div class="skills-section" id="items">
-                <h2>Skills</h2>
-                <p>A blend of technical expertise and problem-solving abilities, with a focus on AI/ML, software development, and web technologies. Constantly exploring new tools and refining skills to build innovative and efficient solutions</p>
-
-                <button id="openModal">Click here</button>
-
-                <div class="overlay"></div>
-
-                <div class="child-wrapper">
-                    <button id="closeModal">Close</button>
-                    <div class="child">
-                        <img src="python-logo.png" alt="Python Logo">
-                        <span>Python</span>
-                        <div class="description">A powerful programming language used in AI & ML.</div>
-                    </div>
-                    <div class="child">
-                        <img src="Hey_Machine_Learning_Logo.png" alt="ML Logo">
-                        <span>Machine Learning</span>
-                        <div class="description">Supervised learning using scikit-learn Including Regression and Classification models.</div>
-                    </div>
-                    <div class="child">
-                        <img src="statistics-bars-infographic-free-png.webp" alt="Deep Learning Logo">
-                        <span>Statistical Algorithm Optimization</span>
-                        <div class="description">Enhancing algorithm efficiency using probabilistic models, data-driven heuristics, and statistical inference.
-                        </div>
-                    </div>
-                    <div class="child">
-                        <img src="image.png" alt="PyTorch Logo">
-                        <span>Tensorflow</span>
-                        <div class="description">Exploring deep learning concepts and model training using TensorFlow and Keras.</div>
-                    </div>
-                    <div class="child">
-                        <img src="exploratory-analysis.png" alt="PyTorch Logo">
-                        <span>EDA</span>
-                        <div class="description">Perform Exploratory Data Analysis to find Insights </div>
-                    </div>
-                    <div class="child">
-                        <img src="pandas-logo-300.png" alt="PyTorch Logo">
-                        <span>Pandas & Numpy</span>
-                        <div class="description">Data Cleaning and Manipulation which is essential for higher accuracy.</div>
-                    </div>
-                    <div class="child">
-                        <img src="flask.png" alt="PyTorch Logo">
-                        <span>Static Web Dev</span>
-                        <div class="description">Can make a functional static website using HTML, CSS, JS, and Flask.</div>
-                    </div>
-                    <div class="child">
-                        <img src="seaborn.png" alt="PyTorch Logo">
-                        <span>Data Visualization</span>
-                        <div class="description">Data Visualization using Matplotlib and Seaborn.</div>
-                    </div>
-                </div>
-                
-            </div>            
-        
-
-        <div class="container">
-            <div class="main">
-                <h1>About Me</h1>
-                <p>Curious mind, calm soul, and a keen observer of the world. I find meaning in the little things and believe that every moment has a story worth noticing.</p>
-            </div>
-    
-            <div class="main">
-                <h1>Projects</h1>
-                <p>Working on various ML projects including some End to End Production Models, open-source contributions, and developing AI-powered applications.</p>
-            </div>
-    
-            <div class="main">
-                <h1>Education</h1>
-                <p>Pursuing B.Tech CSE in specialization with AI & ML. Passionate about research and innovation in the AI field.</p>
-            </div>
-    
-            
-
-            
+        <div class="project-card card p-8">
+          <img src="https://via.placeholder.com/400x200?text=Career+Recommender" alt="Career Path Recommender" class="w-full h-56 object-cover rounded-lg mb-4">
+          <h3 class="text-2xl font-semibold text-white mb-2">Career-Path-Recommender</h3>
+          <p class="text-gray-400 mb-2">Streamlit Web App</p>
+          <p class="text-gray-200 mb-4">
+            Built a personalized career guidance platform for students and professionals using <strong>Streamlit</strong> and modern ML techniques.
+          </p>
+          <a href="https://github.com/binaryecheos/Carrer-Path-Recommender" target="_blank" class="text-teal-400 hover:underline font-semibold">View on GitHub</a>
         </div>
-        <div class="connect" id="connect">
-            <h1>Contact</h1>
-            <p>Slide into my inbox—no weird stuff though. Let’s talk tech, ideas, or whatever’s on your mind!</p>
-            <section >
-                <div class="social-media">
-                    <div class="social-icon instagram">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" alt="Instagram">
-                        <a href="https://www.instagram.com/v.gouravv" target="_blank">@v.gouravv</a>
-                    </div>
-                    <div class="social-icon discord">
-                        <img src="https://upload.wikimedia.org/wikipedia/en/9/98/Discord_logo.svg" alt="Discord">
-                        <a href="https://discord.com/users/1089944354291978320" target="_blank">@binaryecheos</a>
-                    </div>
-                    <div class="social-icon linkedin">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn">
-                        <a href="https://www.linkedin.com/in/binaryecheos/" target="_blank">Gourav Sahu</a>
-                    </div>
-                    <div class="social-icon email">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Email">
-                        <a href="mailto:binaryecheos@gmail.com" target="_blank">binaryecheos</a>
-                    </div>
-                    <div class="social-icon github">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub">
-                        <a href="https://github.com/binaryecheos" target="_blank">Gourav Sahu</a>
-                    </div>
-                    
+      </div>
+    </div>
+  </section>
 
+  <div class="section-divider"></div>
+
+  <!-- Experience & Achievements Section -->
+  <section id="experience" class="py-20 bg-black">
+    <div class="container mx-auto px-6">
+      <h2 class="text-4xl font-bold section-title mb-10">Experience & Achievements</h2>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="card p-8">
+          <h3 class="text-2xl font-semibold text-white mb-4">Internships / Work Experience</h3>
+          <p class="text-gray-200"><strong>UtsavAI – Intern</strong> | Mar 2025 – Apr 2025</p>
+          <ul class="list-disc list-inside text-gray-200">
+            <li>Led data collection & engineering initiatives, exceeding targets by <strong>8x</strong>.</li>
+            <li>Managed and optimized data pipelines for improved efficiency.</li>
+          </ul>
         </div>
+        <div class="card p-8">
+          <h3 class="text-2xl font-semibold text-white mb-4">Certifications & Achievements</h3>
+          <ul class="list-disc list-inside text-gray-200">
+            <li>Intro to Machine Learning – <strong>Kaggle</strong> | 2025</li>
+            <li>2<sup>nd</sup> Position at <strong>Project Showcase on AI</strong> – Google Developers Group, Quantum University</li>
+            <li>Participant at <strong>HackIndia Spark 9</strong> – Hackindia Group & Codex Club</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    
-    <script>
+  <div class="section-divider"></div>
 
-        
-        document.addEventListener("DOMContentLoaded", function () {
-            const menuToggle = document.querySelector(".menu-toggle");
-            const navLinks = document.querySelector(".nav-links");
+  <!-- Contact Section -->
+  <section id="contact" class="py-20 bg-black text-center">
+    <div class="container mx-auto px-6">
+      <h2 class="text-4xl font-bold section-title mb-10">Get in Touch</h2>
+      <p class="text-xl text-gray-200 max-w-xl mx-auto mb-10">
+        Interested in collaborating or learning more about my work? Send me a message!
+      </p>
+      <div class="max-w-lg mx-auto card p-8">
+        <form id="contact-form" class="space-y-6">
+          <input type="text" id="name" placeholder="Your Name" class="contact-input" required>
+          <input type="email" id="email" placeholder="Your Email" class="contact-input" required>
+          <textarea id="message" placeholder="Your Message" rows="5" class="contact-input" required></textarea>
+          <button type="submit" class="gradient-btn text-white font-bold py-3 px-8 rounded-lg w-full">Send Message</button>
+        </form>
+        <p id="form-message" class="text-gray-200 mt-4 hidden"></p>
+      </div>
+      <div class="flex justify-center gap-6 flex-wrap mt-10">
+        <a href="mailto:gourav.sahu.1695@gmail.com" class="gradient-btn text-white font-bold py-3 px-8 rounded-lg">Email Me</a>
+        <a href="https://www.linkedin.com/in/binaryecheos" target="_blank" class="gradient-btn text-white font-bold py-3 px-8 rounded-lg">LinkedIn</a>
+        <a href="https://github.com/binaryecheos" target="_blank" class="gradient-btn text-white font-bold py-3 px-8 rounded-lg">GitHub</a>
+      </div>
+    </div>
+  </section>
 
-            menuToggle.addEventListener("click", function () {
-                navLinks.classList.toggle("active");
-            });
-        });
+  <!-- Footer -->
+  <footer class="bg-black py-8 text-center text-gray-400 card">
+    <p>© 2025 Gourav Sahu. All rights reserved.</p>
+  </footer>
 
+  <!-- Back to Top Button -->
+  <button class="back-to-top" id="back-to-top" title="Back to Top">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+    </svg>
+  </button>
 
-        function openExpansion() {
-            document.getElementById("expansion").classList.add("active");
-            document.getElementById("overlay").classList.add("active");
-        }
-
-        function closeExpansion() {
-            document.getElementById("expansion").classList.remove("active");
-            document.getElementById("overlay").classList.remove("active");
-        }
-        
-        document.addEventListener("DOMContentLoaded", function () {
-        const overlay = document.querySelector(".overlay");
-        const childWrapper = document.querySelector(".child-wrapper");
-        const openBtn = document.querySelector("#openModal");
-        const closeBtn = document.querySelector("#closeModal");
-
-        function openModal() {
-            overlay.classList.add("active");
-            childWrapper.classList.add("active");
-
-            // Ensure the highest z-index
-            overlay.style.zIndex = "99998";
-            childWrapper.style.zIndex = "99999";
-
-            // Force positioning
-            overlay.style.position = "fixed";
-            childWrapper.style.position = "fixed";
-        }
-
-        function closeModal() {
-            overlay.classList.remove("active");
-            childWrapper.classList.remove("active");
-
-            // Reset z-index
-            overlay.style.zIndex = "-1";
-            childWrapper.style.zIndex = "-1";
-        }
-
-        openBtn.addEventListener("click", openModal);
-        closeBtn.addEventListener("click", closeModal);
+  <script>
+    // Custom Cursor
+    const cursor = document.getElementById('custom-cursor');
+    document.addEventListener('mousemove', (e) => {
+      gsap.to(cursor, {
+        x: e.clientX - 10, // Center the cursor
+        y: e.clientY - 10,
+        duration: 0.05,
+        ease: 'power3.out'
+      });
+    });
+    document.querySelectorAll('a, button, .project-card').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
     });
 
-        
-       
-    </script>
+    // GSAP Animations
+    gsap.registerPlugin(ScrollTrigger);
 
+    // Hero section animation
+    gsap.from(".hero-bg h1, .hero-bg p, .hero-bg a", {
+      opacity: 0,
+      y: 80,
+      duration: 1.4,
+      stagger: 0.3,
+      ease: "power4.out"
+    });
 
+    // Section animations
+    gsap.utils.toArray("section").forEach((section) => {
+      gsap.from(section.querySelectorAll("h2, p, ul, .project-card, form, .card"), {
+        opacity: 0,
+        y: 50,
+        duration: 1.1,
+        stagger: 0.2,
+        ease: "power4.out",
+        scrollTrigger: {
+          trigger: section,
+          start: "top 70%",
+          toggleActions: "play none none none"
+        }
+      });
+    });
 
+    // Project card parallax animation
+    gsap.utils.toArray(".project-card").forEach((card, i) => {
+      gsap.from(card, {
+        opacity: 0,
+        y: 60,
+        scale: 0.95,
+        duration: 1.1,
+        delay: i * 0.2,
+        ease: "power4.out",
+        scrollTrigger: {
+          trigger: "#projects",
+          start: "top 70%"
+        }
+      });
+      gsap.from(card.querySelector('img'), {
+        y: 20,
+        duration: 1.4,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: card,
+          start: "top 80%"
+        }
+      });
+    });
+
+    // Divider animation
+    gsap.from(".section-divider", {
+      width: "0%",
+      duration: 1.8,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: ".section-divider",
+        start: "top 85%"
+      }
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // Back to Top button visibility
+    const backToTop = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTop.style.display = 'block';
+        gsap.to(backToTop, { opacity: 1, duration: 0.4, ease: 'power3.out' });
+      } else {
+        gsap.to(backToTop, {
+          opacity: 0,
+          duration: 0.4,
+          ease: 'power3.out',
+          onComplete: () => { backToTop.style.display = 'none'; }
+        });
+      }
+    });
+
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Contact form handling
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+      const formMessage = document.getElementById('form-message');
+
+      if (name && email && message) {
+        formMessage.textContent = "Thank you for your message! I'll get back to you soon.";
+        formMessage.classList.remove('hidden', 'text-red-400');
+        formMessage.classList.add('text-green-400');
+        this.reset();
+      } else {
+        formMessage.textContent = "Please fill out all fields.";
+        formMessage.classList.remove('hidden', 'text-green-400');
+        formMessage.classList.add('text-red-400');
+      }
+    });
+  </script>
 </body>
 </html>
