@@ -41,7 +41,9 @@
       border-radius: 50%;
       pointer-events: none;
       z-index: 9999;
-      transition: transform 0.2s ease, border-color 0.2s ease;
+      transition: none; /* Default state - no delay */
+      will-change: transform; /* Improves performance */
+    }
       box-shadow: 0 0 10px rgba(0, 221, 235, 0.5);
     }
     .custom-cursor::after {
